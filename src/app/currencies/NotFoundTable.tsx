@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { currencyNames } from "../../constants";
 import { ICurrency, INotFoundData } from "./page";
-import ErrorComponent from "@/components/errorMessage";
+import ErrorComponent from "@/components/ErrorMessage";
 
 type TableTypeProps = {
   notFoundData: INotFoundData[];
