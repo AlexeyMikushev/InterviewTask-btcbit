@@ -1,12 +1,10 @@
-// api/currencies.ts
 import axios from "axios";
-import { ICurrency } from "../currencies/page";
-
-const API_URL = "https://653fb0ea9e8bd3be29e10cd4.mockapi.io/api/v1/currencies";
+import { ICurrency } from "../app/currencies/page";
+import { http } from ".";
 
 const fetchCurrencies = async (): Promise<ICurrency[]> => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await http.get("/currencies");
     return response.data;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
