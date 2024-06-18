@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { ICurrency } from "./page";
-import ErrorComponent from "@/components/errorMessage";
+import ErrorComponent from "@/components/ErrorMessage";
 import { currencyNames } from "@/constants";
 
 type TableTypeProps = {

@@ -5,16 +5,19 @@ import OTPForm from "./OTPForm";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
   const [isFormVisible, setFormVisible] = useState(false);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setErrorEmail("");
+    setErrorPassword("");
     setTimeout(() => {
       if (email === "incorrect@email.com") {
-        setError("Incorrect email");
+        setErrorEmail("Incorrect email");
       } else if (password === "incorrect-password") {
-        setError("Incorrect password");
+        setErrorPassword("Incorrect password");
       } else {
         setFormVisible(true);
       }
@@ -39,6 +42,9 @@ export default function LoginForm() {
             required
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
           />
+          {errorEmail && (
+            <p className="text-red-600 text-sm mt-1">{errorEmail}</p>
+          )}
         </div>
         <div>
           <label
@@ -55,6 +61,9 @@ export default function LoginForm() {
             required
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
           />
+          {errorPassword && (
+            <p className="text-red-600 text-sm mt-1">{errorPassword}</p>
+          )}
         </div>
         <button
           type="submit"
