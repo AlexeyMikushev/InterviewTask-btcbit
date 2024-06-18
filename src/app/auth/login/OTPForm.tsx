@@ -1,9 +1,9 @@
 import { useRouter } from "next/navigation";
 import { useState, FormEvent, SetStateAction } from "react";
 
-interface OTPFormProps {
+type OTPFormProps = {
   setFormVisible: (otp: SetStateAction<boolean>) => void;
-}
+};
 
 export default function OTPForm({ setFormVisible }: OTPFormProps) {
   const [otp, setOtp] = useState("");
