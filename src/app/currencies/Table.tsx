@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { ICurrency } from "./page";
-import ErrorComponent from "@/components/ErrorMessage";
+
 import { currencyNames } from "@/constants";
+import ErrorComponent from "@/components/ErrorMessage";
 
 type TableTypeProps = {
   currencies: ICurrency[];
@@ -11,6 +12,7 @@ type TableTypeProps = {
 
 export default function TableComponent({ currencies, error }: TableTypeProps) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [columns, setColumns] = useState(0);
   onresize = () => {
     if (windowWidth !== window.innerWidth) {
       setWindowWidth(window.innerWidth);
@@ -21,7 +23,8 @@ export default function TableComponent({ currencies, error }: TableTypeProps) {
   const padding = 16;
   const totalPadding = padding * 2;
   const availableWidth = windowWidth - totalPadding;
-  const numColumns = Math.floor(availableWidth / columnWidth);
+  const maxColumns = Math.floor(availableWidth / columnWidth);
+  const numColumns = Math.max(maxColumns + columns, 1);
 
   if (error) return <ErrorComponent message={error} />;
 
@@ -44,7 +47,31 @@ export default function TableComponent({ currencies, error }: TableTypeProps) {
             gridTemplateColumns: `repeat(${numColumns}, minmax(var(--column-width), 1fr))`,
           }}
         >
-          <div className="col-span-full text-center font-bold">Balances</div>
+          <div className="col-span-full flex justify-center items-center font-bold">
+            <button
+              className={`bg-teal-500 text-white px-4 py-2 rounded mr-4 w-12 ${
+                1 === numColumns
+                  ? "bg-teal-700 text-gray-300 cursor-not-allowed"
+                  : ""
+              }`}
+              disabled={1 === numColumns}
+              onClick={() => setColumns((prev) => prev - 1)}
+            >
+              -
+            </button>
+            <div className="text-center inline-block px-4">Balances</div>
+            <button
+              className={`bg-teal-500 text-white px-4 py-2 rounded mr-4 w-12 ${
+                maxColumns === numColumns
+                  ? "bg-teal-700 text-gray-300 cursor-not-allowed"
+                  : ""
+              }`}
+              disabled={maxColumns === numColumns}
+              onClick={() => setColumns((prev) => prev + 1)}
+            >
+              +
+            </button>
+          </div>
           <div
             className="grid col-span-full auto-cols-fr"
             style={{

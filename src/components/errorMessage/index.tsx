@@ -7,7 +7,7 @@ interface ErrorProps {
 const ErrorComponent: React.FC<ErrorProps> = ({ message }) => {
   return (
     <div
-      className="max-w-md mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+      className="max-w-md mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4"
       role="alert"
     >
       <span className="block sm:inline">{message}</span>
