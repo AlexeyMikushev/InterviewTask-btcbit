@@ -5,6 +5,7 @@ import fetchCurrencies from "../../api/currencies";
 import fetchNotFoundData from "../../api/notFoundData";
 import NotFoundTable from "./NotFoundTable";
 import Loader from "@/components/Loader";
+import ErrorComponent from "@/components/ErrorMessage";
 
 export interface ICurrency {
   amount: string;
