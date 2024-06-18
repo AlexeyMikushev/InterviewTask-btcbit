@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
 import { useState, FormEvent, SetStateAction } from "react";
 
@@ -7,14 +8,17 @@ type OTPFormProps = {
 
 export default function OTPForm({ setFormVisible }: OTPFormProps) {
   const [otp, setOtp] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     setTimeout(() => {
+      setIsLoading(false);
       if (otp !== "incorrect") {
         router.push("/currencies");
       } else {
-        alert("incorrent One-Time Password");
+        alert("incorrect One-Time Password");
       }
     }, 1000);
   };
@@ -31,6 +35,7 @@ export default function OTPForm({ setFormVisible }: OTPFormProps) {
       id="otp-modal"
       onClick={handleOutsideClick}
     >
+      <Loader isLoading={isLoading} />
       <div className="relative top-20 mx-auto p-8 border w-96 shadow-lg rounded-md bg-white">
         <div className="mt-3 text-center">
           <h3 className="text-lg leading-6 font-medium text-gray-900">

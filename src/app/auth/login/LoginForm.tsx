@@ -1,11 +1,13 @@
 "use client";
 import { FormEvent, useState } from "react";
 import OTPForm from "./OTPForm";
+import Loader from "@/components/Loader";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [errorPassword, setErrorPassword] = useState("");
   const [isFormVisible, setFormVisible] = useState(false);
 
@@ -13,7 +15,9 @@ export default function LoginForm() {
     event.preventDefault();
     setErrorEmail("");
     setErrorPassword("");
+    setIsLoading(true);
     setTimeout(() => {
+      setIsLoading(false);
       if (email === "incorrect@email.com") {
         setErrorEmail("Incorrect email");
       } else if (password === "incorrect-password") {
@@ -26,6 +30,7 @@ export default function LoginForm() {
 
   return (
     <>
+      <Loader isLoading={isLoading} />
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         <div>
           <label
