@@ -10,7 +10,7 @@ export default function RegistrationForm() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    router.push("/");
+    router.push("/currencies");
   };
 
   return (

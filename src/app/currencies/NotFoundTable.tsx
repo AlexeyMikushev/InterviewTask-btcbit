@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-
-import { ICurrency } from "./page";
+import React, { useState } from "react";
+import { currencyNames } from "../../constants";
+import { ICurrency, INotFoundData } from "./page";
 import ErrorComponent from "@/components/errorMessage";
-import { currencyNames } from "@/constants";
 
 type TableTypeProps = {
-  currencies: ICurrency[];
+  notFoundData: INotFoundData[];
   error: string;
 };
 
-export default function TableComponent({ currencies, error }: TableTypeProps) {
+export default function NotFoundTable({ notFoundData, error }: TableTypeProps) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   onresize = () => {
     if (windowWidth !== window.innerWidth) {
@@ -39,7 +38,7 @@ export default function TableComponent({ currencies, error }: TableTypeProps) {
       >
         <div
           className="grid auto-cols-fr"
-          id="Currencies-grid"
+          id="notFoundData-grid"
           style={{
             gridTemplateColumns: `repeat(${numColumns}, minmax(var(--column-width), 1fr))`,
           }}
@@ -61,7 +60,7 @@ export default function TableComponent({ currencies, error }: TableTypeProps) {
               </div>
             ))}
           </div>
-          {currencies.map((currency, index) => (
+          {notFoundData.map((currency, index) => (
             <div
               key={currency.currencyId}
               className={`px-4 py-2 flex justify-between items-center ${

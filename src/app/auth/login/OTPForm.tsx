@@ -12,7 +12,7 @@ export default function OTPForm({ setFormVisible }: OTPFormProps) {
     e.preventDefault();
     setTimeout(() => {
       if (otp !== "incorrect") {
-        router.push("/");
+        router.push("/currencies");
       } else {
         alert("incorrent One-Time Password");
       }
